@@ -4103,6 +4103,10 @@ react-is@^16.5.0:
   version "16.5.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.5.1.tgz#c6e8734fd548a22e1cef4fd0833afbeb433b85ee"
 
+react-native-nfc-hce@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/react-native-nfc-hce/-/react-native-nfc-hce-0.5.6.tgz#543f1a21e3899ec96cbf4c6252476d0ab351d3e9"
+
 react-native-typescript-transformer@^1.2.10:
   version "1.2.10"
   resolved "https://registry.yarnpkg.com/react-native-typescript-transformer/-/react-native-typescript-transformer-1.2.10.tgz#6f76c1449028cdeafa184b533301ecd547367ed1"

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SmartLockMobile</string>
+    <string name="card_title">CardTitle</string>
+    <string name="service_name">ServiceName</string>
 </resources>
