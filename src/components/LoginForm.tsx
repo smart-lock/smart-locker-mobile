@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextInput, View, Alert, Image } from 'react-native';
+import { TextInput, View, Alert, Image, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { Kaede } from 'react-native-textinput-effects';
 import { Text } from './Text';
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
@@ -9,6 +9,9 @@ export interface ILoginFormState {
   login: string
   password: string
 }
+
+const { width: windowWidth } = Dimensions.get('window'
+)
 
 export class LoginForm extends React.Component<{}, ILoginFormState> {
   public state = {
@@ -30,7 +33,7 @@ export class LoginForm extends React.Component<{}, ILoginFormState> {
     } = this.state
     const disabled = !login || !password
     return (
-      <View style={{alignSelf: 'stretch'}}>
+      <KeyboardAvoidingView style={{alignSelf: 'stretch'}} behavior="padding" enabled keyboardVerticalOffset={50}>
         <Image
           resizeMode="contain"
           style={{width: 150, height: 150, alignSelf: 'center', marginBottom: 40}}
@@ -61,15 +64,16 @@ export class LoginForm extends React.Component<{}, ILoginFormState> {
           onChangeText={this.setFormValue('password')}
         />
         <AwesomeButton
-          style={{alignSelf: 'center', marginTop: 40}}
           backgroundColor={'#fd9644'}
           backgroundActive={'#fa8231'}
           backgroundDarker={'#fa8231'}
+          height={50}
+          width={windowWidth}
           onPress={this.handleLoginPress}
           disabled={disabled}>
           <Text style={{fontWeight: '400', color: '#fff', fontSize: 20}}>LOGIN</Text>
         </AwesomeButton>
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
