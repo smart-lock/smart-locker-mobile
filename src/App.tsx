@@ -205,7 +205,7 @@ export default class App extends Component {
     return (
       <Fragment>
         <StatusBar barStyle='light-content' />
-        <RootNavigator persistenceKey={"NavigationState"} />
+        <RootNavigator persistenceKey={"NavigationState2"} />
       </Fragment>
     )
     return (

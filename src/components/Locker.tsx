@@ -8,6 +8,7 @@ import moment from 'moment'
 
 export interface ILocker {
   id: string
+  onPress: () => void
 }
 
 const { width } = Dimensions.get('window')
@@ -18,9 +19,11 @@ export const lockerWidth = (width / lockersPerRow) - (lockerSpacing * lockersPer
 
 
 export const Locker: React.SFC<ILocker> = ({
-  id
+  id,
+  onPress
 }) => (
   <AwesomeButton
+    onPress={onPress}
     backgroundColor={'#d1d8e0'}
     // backgroundActive={theme.backgroundActive}
     backgroundDarker={'#a5b1c2'}

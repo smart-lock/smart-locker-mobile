@@ -11,16 +11,18 @@ export interface ILocker {
 }
 export interface ILockerGrid {
   lockers: ILocker[]
+  onPressLocker: (lockerId: string) => void
 }
 export const LockerGrid: React.SFC<ILockerGrid> = ({
-  lockers
+  lockers,
+  onPressLocker,
 }) => (
   <GridView
     itemDimension={lockerWidth}
     spacing={lockerSpacing}
     items={['1','2','3','4','5','6']}
     renderItem={(item: string) => (
-      <Locker id={item} />
+      <Locker id={item} onPress={() => onPressLocker(item)}/>
     )}
   />
 )
