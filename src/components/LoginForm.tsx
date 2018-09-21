@@ -39,14 +39,18 @@ export class LoginForm extends React.Component<{}, ILoginFormState> {
     } = this.state
     const disabled = !login || !password
     const theme = disabled ? disabledTheme : enabledTheme
-    
+
     return (
-      <KeyboardAvoidingView style={{alignSelf: 'stretch'}} behavior="padding" enabled keyboardVerticalOffset={50}>
-        <Image
-          resizeMode="contain"
-          style={{width: 150, height: 150, alignSelf: 'center', marginBottom: 40}}
-          source={{uri: 'https://freeiconshop.com/wp-content/uploads/edd/lock-outline-filled.png'}}
-        />
+      <KeyboardAvoidingView style={{alignSelf: 'stretch', flex: 1}} behavior="padding" enabled keyboardVerticalOffset={0}>
+        <View style={{flex: 1, alignSelf: 'center', justifyContent: 'center'}}>
+          <Image
+            resizeMode="contain"
+            style={{width: 150, height: 150, alignSelf: 'center', marginBottom: 40}}
+            source={{uri: 'https://freeiconshop.com/wp-content/uploads/edd/lock-outline-filled.png'}}
+          />
+        </View>
+        
+        <View style={{flex: 1, alignSelf: 'stretch'}}>
         <Kaede
           style={{overflow: 'hidden'}}
           label={'Login'}
@@ -71,6 +75,7 @@ export class LoginForm extends React.Component<{}, ILoginFormState> {
           value={password}
           onChangeText={this.setFormValue('password')}
         />
+        </View>
         <AwesomeButton
           backgroundColor={theme.backgroundColor}
           backgroundActive={theme.backgroundActive}
