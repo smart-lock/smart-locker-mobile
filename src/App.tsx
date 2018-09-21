@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Button, Alert } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Button, Alert } from 'react-native';
 import { client, clientPrisma } from './apollo';
 import gql from 'graphql-tag';
+import { LockButton } from './components/LockButton';
+import { Text } from './components/Text';
+import { LoginForm } from './components/LoginForm';
+
 
 export interface IClaimMutationResponse {
   claimLocker: {
@@ -97,22 +101,22 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    setInterval(async () => {
-      const response = await clientPrisma.query<IGetLockerQueryResponse>({
-        query: GET_LOCKER_QUERY,
-        fetchPolicy: 'network-only',
-        variables: {
-          lockerId: 'cjmb42tqu006w0a2019feg6bl'
-        }
-      })
+    // setInterval(async () => {
+    //   const response = await clientPrisma.query<IGetLockerQueryResponse>({
+    //     query: GET_LOCKER_QUERY,
+    //     fetchPolicy: 'network-only',
+    //     variables: {
+    //       lockerId: 'cjmb42tqu006w0a2019feg6bl'
+    //     }
+    //   })
 
-      if (response.data) {
-        console.log(response.data.locker)
-        this.setState({
-          locker: response.data.locker,
-        })
-      } 
-    }, 1000)
+    //   if (response.data) {
+    //     console.log(response.data.locker)
+    //     this.setState({
+    //       locker: response.data.locker,
+    //     })
+    //   } 
+    // }, 1000)
   }
   private handleClaim = async () => {
     try {
@@ -151,6 +155,7 @@ export default class App extends Component {
   }
 
   private handleLock = async () => {
+    return
     try {
       const response = await client.mutate<ILockMutationResponse>({
         mutation: LOCK_MUTATION,
@@ -194,15 +199,36 @@ export default class App extends Component {
         alarm,
       }
     } = this.state
+    
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Smart Locker</Text>
-        <View style={{flex: 1}}>
-          <Button
+        <LoginForm />
+      </View>
+    )
+    return (
+      <View style={styles.container}>
+        {/* <Text style={styles.welcome}>Smart Locker</Text> */}
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <LockButton
+            onPress={this.handleLock}
+            locked={!closed}
+            disabled
+            style={{
+              marginBottom: 20,
+            }}
+          />
+          {!closed && (
+            <Text>
+              Feche a porta para poder trancar o armário
+            </Text>
+          )}
+          
+          {/* <Button
             title="LOGIN"
             onPress={this.handleLogin}
-          />
-          <Button
+          /> */}
+          
+          {/* <Button
             title="CLAIM"
             onPress={this.handleClaim}
           />
@@ -217,10 +243,10 @@ export default class App extends Component {
           <Button
             title="UNLOCK"
             onPress={this.handleUnlock}
-          />
+          /> */}
         </View>
         
-        <View style={{alignSelf: 'stretch'}}>
+        {/* <View style={{alignSelf: 'stretch'}}>
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <BooleanIndicator label="CLOSED" value={closed} />
           </View>
@@ -236,7 +262,7 @@ export default class App extends Component {
           <View style={{display: 'flex', flexDirection: 'row'}}>
             <BooleanIndicator label="ALARM" value={alarm} />
           </View>
-        </View>
+        </View> */}
         
       </View>
     );
@@ -248,7 +274,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#f7f7f7',
   },
   welcome: {
     fontSize: 20,
