@@ -23,7 +23,7 @@ const lockedTheme = {
   backgroundDarker:"#20bf6b",
 }
 
-const disabledTheme = {
+export const disabledTheme = {
   backgroundColor:"#d1d8e0",
   backgroundActive:"#d1d8e0",
   backgroundDarker:"#a5b1c2",

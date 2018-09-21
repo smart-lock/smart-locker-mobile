@@ -4,6 +4,7 @@ import { Kaede } from 'react-native-textinput-effects';
 import { Text } from './Text';
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import AwesomeButton from 'react-native-really-awesome-button'
+import { disabledTheme } from './LockButton';
 
 export interface ILoginFormState {
   login: string
@@ -13,6 +14,11 @@ export interface ILoginFormState {
 const { width: windowWidth } = Dimensions.get('window'
 )
 
+const enabledTheme = {
+  backgroundColor: '#fd9644',
+  backgroundActive: '#fa8231',
+  backgroundDarker: '#fa8231',
+}
 export class LoginForm extends React.Component<{}, ILoginFormState> {
   public state = {
     login: '',
@@ -32,6 +38,8 @@ export class LoginForm extends React.Component<{}, ILoginFormState> {
       password
     } = this.state
     const disabled = !login || !password
+    const theme = disabled ? disabledTheme : enabledTheme
+    
     return (
       <KeyboardAvoidingView style={{alignSelf: 'stretch'}} behavior="padding" enabled keyboardVerticalOffset={50}>
         <Image
@@ -64,9 +72,9 @@ export class LoginForm extends React.Component<{}, ILoginFormState> {
           onChangeText={this.setFormValue('password')}
         />
         <AwesomeButton
-          backgroundColor={'#fd9644'}
-          backgroundActive={'#fa8231'}
-          backgroundDarker={'#fa8231'}
+          backgroundColor={theme.backgroundColor}
+          backgroundActive={theme.backgroundActive}
+          backgroundDarker={theme.backgroundDarker}
           height={50}
           width={windowWidth}
           onPress={this.handleLoginPress}
