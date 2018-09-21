@@ -1,25 +1,33 @@
 import React from 'react'
-import { TextInput, View, Alert, Image, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { View, Alert, Image, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { Kaede } from 'react-native-textinput-effects';
 import { Text } from './Text';
-import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import AwesomeButton from 'react-native-really-awesome-button'
 import { disabledTheme } from './LockButton';
+import { Colors } from '../resources/colors';
 
+
+export interface ILoginFormValues {
+  login: string
+  password: String
+}
 export interface ILoginFormState {
   login: string
   password: string
 }
 
-const { width: windowWidth } = Dimensions.get('window'
-)
+const { width: windowWidth } = Dimensions.get('window')
 
 const enabledTheme = {
   backgroundColor: '#fd9644',
   backgroundActive: '#fa8231',
   backgroundDarker: '#fa8231',
 }
-export class LoginForm extends React.Component<{}, ILoginFormState> {
+
+export interface ILoginFormProps {
+  onSubmit: (values: ILoginFormValues) => Promise<void>
+}
+export class LoginForm extends React.Component<ILoginFormProps, ILoginFormState> {
   public state = {
     login: '',
     password: ''
@@ -30,7 +38,7 @@ export class LoginForm extends React.Component<{}, ILoginFormState> {
   } as any)
 
   private handleLoginPress = () => {
-    Alert.alert(JSON.stringify(this.state))
+    this.props.onSubmit(this.state)
   }
   render() {
     const {
@@ -71,6 +79,8 @@ export class LoginForm extends React.Component<{}, ILoginFormState> {
           label={'Password'}
           labelStyle={{
             fontWeight: '100',
+            // color: Colors.WHITE,
+            // backgroundColor: Colors.PRIMARY,
           }}
           inputStyle={{
             fontWeight: '100',

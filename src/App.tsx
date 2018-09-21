@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { StyleSheet, View, TouchableOpacity, Button, Alert, StatusBar } from 'react-native';
 import { client, clientPrisma } from './apollo';
 import gql from 'graphql-tag';
@@ -6,6 +6,7 @@ import { LockButton } from './components/LockButton';
 import { Text } from './components/Text';
 import { LoginForm } from './components/LoginForm';
 import { LockerGrid } from './components/LockerGrid';
+import { RootNavigator } from './navigation/RootNavigator';
 
 
 export interface IClaimMutationResponse {
@@ -202,14 +203,10 @@ export default class App extends Component {
     } = this.state
     
     return (
-      <View style={styles.container}>
-        <LockerGrid />
-      </View>
-    )
-    return (
-      <View style={styles.container}>
-        <LoginForm />
-      </View>
+      <Fragment>
+        <StatusBar barStyle='light-content' />
+        <RootNavigator />
+      </Fragment>
     )
     return (
       <View style={styles.container}>
@@ -218,7 +215,7 @@ export default class App extends Component {
           <LockButton
             onPress={this.handleLock}
             locked={!closed}
-            disabled
+            disabled={false}
             style={{
               marginBottom: 20,
             }}
