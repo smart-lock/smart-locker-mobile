@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity, Button, Alert } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Button, Alert, StatusBar } from 'react-native';
 import { client, clientPrisma } from './apollo';
 import gql from 'graphql-tag';
 import { LockButton } from './components/LockButton';
 import { Text } from './components/Text';
 import { LoginForm } from './components/LoginForm';
+import { LockerGrid } from './components/LockerGrid';
 
 
 export interface IClaimMutationResponse {
@@ -202,6 +203,11 @@ export default class App extends Component {
     
     return (
       <View style={styles.container}>
+        <LockerGrid />
+      </View>
+    )
+    return (
+      <View style={styles.container}>
         <LoginForm />
       </View>
     )
@@ -272,6 +278,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: StatusBar.currentHeight || 22,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f7f7f7',
