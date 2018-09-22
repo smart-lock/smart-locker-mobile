@@ -1,94 +1,11 @@
-import React, { Component, Fragment } from 'react';
-import { StyleSheet, View, TouchableOpacity, Button, Alert, StatusBar } from 'react-native';
-import { client, clientPrisma } from './apollo';
-import gql from 'graphql-tag';
+import React, { Component } from 'react';
+import { StyleSheet, View, Alert, StatusBar } from 'react-native';
+import { client } from './apollo';
 import { LockButton } from './components/LockButton';
 import { Text } from './components/Text';
-import { LoginForm } from './components/LoginForm';
-import { LockerGrid } from './components/LockerGrid';
 import { RootNavigator } from './navigation/RootNavigator';
+import { ILockMutationResponse, LOCK_MUTATION, IUnlockMutationResponse, UNLOCK_MUTATION, IUnclaimMutationResponse, UNCLAIM_MUTATION, IClaimMutationResponse, CLAIM_MUTATION } from './graphql/mutations';
 
-
-export interface IClaimMutationResponse {
-  claimLocker: {
-    id: string
-  }
-}
-
-const CLAIM_MUTATION = gql`
-mutation claimLocker($lockerId: ID!) {
-	claimLocker(lockerId: $lockerId) {
-    id
-  }
-}`
-
-export interface IUnclaimMutationResponse {
-  unclaimLocker: {
-    id: string
-  }
-}
-const UNCLAIM_MUTATION = gql`
-mutation unclaimLocker($lockerId: ID!) {
-  unclaimLocker(lockerId: $lockerId) {
-    id
-  }
-}`
-
-export interface ILockMutationResponse {
-  lockLocker: {
-    id: string
-  }
-}
-
-const LOCK_MUTATION = gql`
-mutation lockLocker($lockerId: ID!) {
-  lockLocker(lockerId:$lockerId) {
-    id
-  }
-}`
-
-
-export interface IUnlockMutationResponse {
-  unlockLocker: {
-    id: string
-  }
-}
-const UNLOCK_MUTATION = gql`
-mutation unlockLocker($lockerId: ID!) {
-  unlockLocker(lockerId:$lockerId) {
-    id
-  }
-}`
-
-export interface IGetLockerQueryResponse {
-  locker: {
-    closed: boolean,
-    locked: boolean,
-    busy: boolean,
-    alarm: boolean,
-  }
-}
-const GET_LOCKER_QUERY = gql`
-query locker($lockerId: ID!) {
-  locker(where: {id: $lockerId}) {
-    closed
-    locked
-    busy
-    alarm
-  }
-}
-`
-const BooleanIndicator: React.SFC<{
-  label: string,
-  value: boolean
-}> = ({
-  label,
-  value
-}) => (
-  <View style={{flex: 1, backgroundColor: value ? 'lightgreen' : 'tomato', padding: 30, alignItems: 'center'}}>
-    <Text style={{fontSize: 32, fontWeight: '200', color: '#FFF'}}>{label}</Text>
-  </View>
-)
 export default class App extends Component {
   public state = {
     locker: {
@@ -98,11 +15,13 @@ export default class App extends Component {
       alarm: false,
     }
   }
+  
   private handleLogin = async () => {
     Alert.alert('login')
   }
 
   componentDidMount() {
+    connect()
     // setInterval(async () => {
     //   const response = await clientPrisma.query<IGetLockerQueryResponse>({
     //     query: GET_LOCKER_QUERY,
@@ -203,10 +122,10 @@ export default class App extends Component {
     } = this.state
     
     return (
-      <Fragment>
+      <View style={{flex: 1}}>
         <StatusBar barStyle='light-content' />
-        <RootNavigator persistenceKey={"NavigationState2"} />
-      </Fragment>
+        <RootNavigator persistenceKey={"NavigationState4"} />
+      </View>
     )
     return (
       <View style={styles.container}>
