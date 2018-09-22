@@ -21,7 +21,6 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    connect()
     // setInterval(async () => {
     //   const response = await clientPrisma.query<IGetLockerQueryResponse>({
     //     query: GET_LOCKER_QUERY,
@@ -124,7 +123,7 @@ export default class App extends Component {
     return (
       <View style={{flex: 1}}>
         <StatusBar barStyle='light-content' />
-        <RootNavigator persistenceKey={"NavigationState4"} />
+        <RootNavigator persistenceKey={"NavigationState5"} />
       </View>
     )
     return (

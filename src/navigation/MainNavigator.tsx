@@ -5,13 +5,21 @@ import { ClaimLockerNavigator } from './ClaimLockerNavigator';
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import { Colors } from '../resources/colors';
 import { SettingsNavigator } from './SettingsNavigator';
+import { LockersMapNavigator } from './LockersMapNavigator'
 
 export const MainScreens = {
   ClaimLocker: 'Main/ClaimLocker',
   MyLockers: 'Main/MyLockers',
   Settings: 'Main/Settings',
+  LockersMap: 'Main/LockersMap'
 }
 export const MainNavigator = createBottomTabNavigator({
+  [MainScreens.LockersMap]: {
+    screen: LockersMapNavigator,
+    navigationOptions: {
+      title: 'Encontrar'
+    }
+  },
   [MainScreens.ClaimLocker]: {
     screen: ClaimLockerNavigator,
     navigationOptions: {
@@ -29,13 +37,16 @@ export const MainNavigator = createBottomTabNavigator({
     navigationOptions: {
       title: 'Settings'
     }
-  }
+  },
 }, {
   navigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ tintColor }) => {
       const { routeName } = navigation.state;
       let iconName;
       switch (routeName) {
+        case MainScreens.LockersMap:
+          iconName = 'location'
+          break;
         case MainScreens.ClaimLocker:
           iconName = 'camera'
           break;
