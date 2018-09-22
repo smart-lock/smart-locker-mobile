@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Alert, StatusBar } from 'react-native';
-import { client } from './apollo';
+import { apolloClient } from './apollo';
 import { LockButton } from './components/LockButton';
 import { Text } from './components/Text';
 import { RootNavigator } from './navigation/RootNavigator';
 import { ILockMutationResponse, LOCK_MUTATION, IUnlockMutationResponse, UNLOCK_MUTATION, IUnclaimMutationResponse, UNCLAIM_MUTATION, IClaimMutationResponse, CLAIM_MUTATION } from './graphql/mutations';
+import { ApolloProvider } from 'react-apollo';
 
 export default class App extends Component {
   public state = {
@@ -38,78 +39,78 @@ export default class App extends Component {
     //   } 
     // }, 1000)
   }
-  private handleClaim = async () => {
-    try {
-      const response = await client.mutate<IClaimMutationResponse>({
-        mutation: CLAIM_MUTATION,
-        variables: {
-          lockerId: 'cjmb42tqu006w0a2019feg6bl',
-        }
-      })
+  // private handleClaim = async () => {
+  //   try {
+  //     const response = await client.mutate<IClaimMutationResponse>({
+  //       mutation: CLAIM_MUTATION,
+  //       variables: {
+  //         lockerId: 'cjmb42tqu006w0a2019feg6bl',
+  //       }
+  //     })
   
-      if (response.data) {
-        Alert.alert('Success!')
-      }  
-    } catch (err) {
-      Alert.alert(err.toString())
-    }
+  //     if (response.data) {
+  //       Alert.alert('Success!')
+  //     }  
+  //   } catch (err) {
+  //     Alert.alert(err.toString())
+  //   }
     
-  }
+  // }
 
-  private handleUnclaim = async () => {
-    try {
-      const response = await client.mutate<IUnclaimMutationResponse>({
-        mutation: UNCLAIM_MUTATION,
-        variables: {
-          lockerId: 'cjmb42tqu006w0a2019feg6bl',
-        }
-      })
+  // private handleUnclaim = async () => {
+  //   try {
+  //     const response = await client.mutate<IUnclaimMutationResponse>({
+  //       mutation: UNCLAIM_MUTATION,
+  //       variables: {
+  //         lockerId: 'cjmb42tqu006w0a2019feg6bl',
+  //       }
+  //     })
   
-      if (response.data) {
-        Alert.alert('Success!')
-      }
-    } catch (err) {
-      Alert.alert(err.toString())
-    }
+  //     if (response.data) {
+  //       Alert.alert('Success!')
+  //     }
+  //   } catch (err) {
+  //     Alert.alert(err.toString())
+  //   }
     
-  }
+  // }
 
-  private handleLock = async () => {
-    return
-    try {
-      const response = await client.mutate<ILockMutationResponse>({
-        mutation: LOCK_MUTATION,
-        variables: {
-          lockerId: 'cjmb42tqu006w0a2019feg6bl',
-        }
-      })
+  // private handleLock = async () => {
+  //   return
+  //   try {
+  //     const response = await client.mutate<ILockMutationResponse>({
+  //       mutation: LOCK_MUTATION,
+  //       variables: {
+  //         lockerId: 'cjmb42tqu006w0a2019feg6bl',
+  //       }
+  //     })
   
-      if (response.data) {
-        Alert.alert('Success!')
-      }
-    } catch (err) {
-      Alert.alert(err.toString())
-    }
+  //     if (response.data) {
+  //       Alert.alert('Success!')
+  //     }
+  //   } catch (err) {
+  //     Alert.alert(err.toString())
+  //   }
     
-  }
+  // }
 
-  private handleUnlock = async () => {
-    try {
-      const response = await client.mutate<IUnlockMutationResponse>({
-        mutation: UNLOCK_MUTATION,
-        variables: {
-          lockerId: 'cjmb42tqu006w0a2019feg6bl',
-        }
-      })
+  // private handleUnlock = async () => {
+  //   try {
+  //     const response = await client.mutate<IUnlockMutationResponse>({
+  //       mutation: UNLOCK_MUTATION,
+  //       variables: {
+  //         lockerId: 'cjmb42tqu006w0a2019feg6bl',
+  //       }
+  //     })
   
-      if (response.data) {
-        Alert.alert('Success!')
-      }
-    } catch (err) {
-      Alert.alert(err.toString())
-    }
+  //     if (response.data) {
+  //       Alert.alert('Success!')
+  //     }
+  //   } catch (err) {
+  //     Alert.alert(err.toString())
+  //   }
     
-  }
+  // }
   render() {
     const {
       locker: {
@@ -121,23 +122,25 @@ export default class App extends Component {
     } = this.state
     
     return (
-      <View style={{flex: 1}}>
-        <StatusBar barStyle='light-content' />
-        <RootNavigator persistenceKey={"NavigationState5"} />
-      </View>
+      <ApolloProvider client={apolloClient}>
+        <View style={{flex: 1}}>
+          <StatusBar barStyle='light-content' />
+          <RootNavigator persistenceKey={"NavigationState5"} />
+        </View>
+      </ApolloProvider>  
     )
     return (
       <View style={styles.container}>
         {/* <Text style={styles.welcome}>Smart Locker</Text> */}
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <LockButton
+          {/* <LockButton
             onPress={this.handleLock}
             locked={!closed}
             disabled={false}
             style={{
               marginBottom: 20,
             }}
-          />
+          /> */}
           {!closed && (
             <Text>
               Feche a porta para poder trancar o armário
