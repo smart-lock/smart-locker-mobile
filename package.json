@@ -7,8 +7,14 @@
     "test": "jest"
   },
   "dependencies": {
-    "apollo-boost": "^0.1.16",
+    "apollo-cache-inmemory": "^1.2.10",
+    "apollo-client": "^2.4.2",
+    "apollo-link": "^1.2.3",
+    "apollo-link-error": "^1.1.1",
+    "apollo-link-http": "^1.5.5",
+    "apollo-link-ws": "^1.0.9",
     "graphql": "^14.0.2",
+    "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "react": "16.5.0",
     "react-apollo": "^2.1.11",
@@ -20,7 +26,8 @@
     "react-native-super-grid": "^2.4.3",
     "react-native-textinput-effects": "^0.4.2",
     "react-native-vector-icons": "^5.0.0",
-    "react-navigation": "^2.16.0"
+    "react-navigation": "^2.16.0",
+    "subscriptions-transport-ws": "^0.9.15"
   },
   "devDependencies": {
     "@types/graphql": "^14.0.0",
