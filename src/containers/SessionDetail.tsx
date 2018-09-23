@@ -9,6 +9,7 @@ import { LockMutation, UnlockMutation, UnclaimMutation } from '../graphql/mutati
 
 export interface ISessionDetailContainerProps {
   lockerSessionId: string
+  navigateToMyLockers: () => void
 }
 
 
@@ -49,7 +50,10 @@ export class SessionDetailContainer extends React.Component<ISessionDetailContai
                             onPressUnlock={() => {
                               unlockMutation()
                             }}
-                            onPressUnclaim={() => unclaimMutation()}
+                            onPressUnclaim={async () => {
+                              await unclaimMutation()
+                              this.props.navigateToMyLockers()
+                            }}
                             lockLoading={lockLoading}
                             unlockLoading={unlockLoading}
                             unclaimLoading={unclaimLoading}
