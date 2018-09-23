@@ -10,6 +10,8 @@ import moment from 'moment'
 import { BasicListItem } from './BasicListItem';
 import { ILockerSession } from '../model/session';
 import { getChargeBetweenDates } from '../logic/charge';
+import { formatReais } from '../logic/money';
+import { Clock } from './Clock';
 
 export interface ILockerSessionDetailProps extends ILockerSession {
   onPressLock: () => void
@@ -75,7 +77,11 @@ export class LockerSessionDetail extends React.Component<ILockerSessionDetailPro
             </BasicListItem>
             <BasicListItem>
               <Text style={{color: '#999'}}>Cobrança</Text>
-              <Text>{getChargeBetweenDates(new Date(), startedAt)}</Text>
+              <Clock>
+                {(now) => (
+                  <Text style={{color: Colors.SUCCESS}}>{formatReais(getChargeBetweenDates(now, startedAt))}</Text>
+                )}
+              </Clock>
             </BasicListItem>
           </View>
           <View style={{alignItems: 'center', justifyContent: 'center', padding: 10, flex: 1}}>
@@ -85,6 +91,12 @@ export class LockerSessionDetail extends React.Component<ILockerSessionDetailPro
               disabled={!locker.closed}
             />
           </View>
+          {!locker.closed && (
+            <Text style={{textAlign: 'center', fontWeight: '700'}}>
+              O armário está aberto. Feche-o para travar
+            </Text>  
+          )}
+          
         </ScrollView>
       </ScreenWrapper>
     )
