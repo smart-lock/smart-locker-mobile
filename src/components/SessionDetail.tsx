@@ -4,7 +4,7 @@ import { basicStackScreenNavigationOptions } from '../resources/styles';
 import { LockButton } from '../components/LockButton';
 import MapView, { Marker } from 'react-native-maps';
 import { Colors } from '../resources/colors';
-import { View, InteractionManager, ScrollView } from 'react-native';
+import { View, InteractionManager, ScrollView, Dimensions } from 'react-native';
 import { Text } from '../components/Text';
 import moment from 'moment'
 import { BasicListItem } from './BasicListItem';
@@ -16,6 +16,10 @@ import { Clock } from './Clock';
 export interface ILockerSessionDetailProps extends ILockerSession {
   onPressLock: () => void
   onPressUnlock: () => void
+  onPressUnclaim: () => void
+  lockLoading: boolean
+  unlockLoading: boolean
+  unclaimLoading: boolean
 }
 
 export class LockerSessionDetail extends React.Component<ILockerSessionDetailProps> {
@@ -39,13 +43,17 @@ export class LockerSessionDetail extends React.Component<ILockerSessionDetailPro
     const {
       onPressLock,
       onPressUnlock,
+      onPressUnclaim,
       locker,
       startedAt,
+      lockLoading,
+      unlockLoading,
+      unclaimLoading
     } = this.props
 
     return (
       <ScreenWrapper>
-        <ScrollView>
+        {/* <ScrollView> */}
           {this.state.renderMap ? (
             <MapView
               style={{height: 200, alignSelf: 'stretch'}}
@@ -84,11 +92,30 @@ export class LockerSessionDetail extends React.Component<ILockerSessionDetailPro
               </Clock>
             </BasicListItem>
           </View>
-          <View style={{alignItems: 'center', justifyContent: 'center', padding: 10, flex: 1}}>
+          <View style={{alignItems: 'center', justifyContent: 'space-around', flex: 1, flexDirection: 'row'}}>
             <LockButton
-              onPress={() => locker.locked ? onPressUnlock() : onPressLock()}
+              onPress={locker.locked ? onPressUnlock : onPressLock}
               locked={locker.locked}
-              disabled={!locker.closed}
+              activeLabel="UNLOCK"
+              inactiveLabel="LOCK"
+              activeIcon="unlock"
+              inactiveIcon="lock"
+              disabled={!locker.closed || lockLoading || unlockLoading}
+              loading={lockLoading || unlockLoading}
+              width={150}
+              height={150}
+            />
+            <LockButton
+              onPress={onPressUnclaim}
+              locked={false}
+              activeLabel="Finalizar"
+              inactiveLabel="Finalizar"
+              activeIcon="check"
+              inactiveIcon="check"
+              disabled={!locker.closed || !locker.locked || unclaimLoading}
+              loading={unclaimLoading}
+              width={150}
+              height={150}
             />
           </View>
           {!locker.closed && (
@@ -97,7 +124,7 @@ export class LockerSessionDetail extends React.Component<ILockerSessionDetailPro
             </Text>  
           )}
           
-        </ScrollView>
+        {/* </ScrollView> */}
       </ScreenWrapper>
     )
   }
