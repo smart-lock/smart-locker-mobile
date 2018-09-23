@@ -49,3 +49,23 @@ query mySessions {
   }
 }
 `
+
+export const LOCKER_SESSION_QUERY = gql`
+  query lockerSession($lockerSessionId: ID!) {
+    lockerSession(id: $lockerSessionId) {
+      id
+      startedAt
+      locker {
+        id
+        idInCluster
+        busy
+        locked
+        alarm
+        closed
+        cluster {
+          macAddress
+        }
+      }
+    }
+  }
+`
