@@ -7,7 +7,7 @@ import MapView, { Marker } from 'react-native-maps';
 
 export class LockersMapScreen extends React.Component<NavigationInjectedProps> {
   static navigationOptions = basicStackScreenNavigationOptions({
-    title: 'Meus armários'
+    title: 'Encontrar armário'
   })
   
   render() {
