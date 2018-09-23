@@ -18,3 +18,34 @@ query locker($lockerId: ID!) {
   }
 }
 `
+const MY_LOCKERS_QUERY = gql`
+query myLockers {
+	myLockers {
+    id
+    busy
+    locked
+    alarm
+    closed
+  }
+}
+`
+
+export const MY_SESSIONS_QUERY = gql`
+query mySessions {
+  mySessions {
+    id
+    startedAt
+    locker {
+      id
+      idInCluster
+      busy
+      locked
+      alarm
+      closed
+      cluster {
+        macAddress
+      }
+    }
+  }
+}
+`
