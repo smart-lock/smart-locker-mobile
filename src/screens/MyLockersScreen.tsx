@@ -1,24 +1,25 @@
 import React from 'react'
 import { ScreenWrapper } from '../components/ScreenWrapper';
 import { basicStackScreenNavigationOptions } from '../resources/styles';
-import { LockerGrid } from '../components/LockerGrid';
 import { NavigationInjectedProps } from 'react-navigation';
 import { MyLockersScreens } from '../navigation/MyLockersNavigator';
+import { MyLockersContainer } from '../containers/MyLockers';
 
 export class MyLockersScreen extends React.Component<NavigationInjectedProps> {
   static navigationOptions = basicStackScreenNavigationOptions({
     title: 'Meus armários'
   })
   
-  private handlePressLocker = (lockerId: string) => {
-    this.props.navigation.navigate(MyLockersScreens.LockerDetail)
+  private navigateToSessionDetail = (lockerSessionId: string) => {
+    this.props.navigation.navigate(MyLockersScreens.SessionDetail, {
+      lockerSessionId,
+    })
   }
   render() {
     return (
       <ScreenWrapper>
-        <LockerGrid
-          lockers={[]}
-          onPressLocker={this.handlePressLocker}
+        <MyLockersContainer
+          navigateToSessionDetail={this.navigateToSessionDetail}
         />
       </ScreenWrapper>
     )
