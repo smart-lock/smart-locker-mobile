@@ -1,16 +1,16 @@
 import { createStackNavigator } from 'react-navigation'
 import { MyLockersScreen } from '../screens/MyLockersScreen';
-import { LockerDetailScreen } from '../screens/LockerDetail';
+import { SessionDetailScreen } from '../screens/SessionDetailScreen';
 
 export const MyLockersScreens = {
   MyLockers: 'MyLockers/MyLockers',
-  LockerDetail: 'MyLockers/LockerDetail',
+  SessionDetail: 'MyLockers/SessionDetail',
 }
 export const MyLockersNavigator = createStackNavigator({
   [MyLockersScreens.MyLockers]: {
     screen: MyLockersScreen,
   },
-  [MyLockersScreens.LockerDetail]: {
-    screen: LockerDetailScreen,
+  [MyLockersScreens.SessionDetail]: {
+    screen: SessionDetailScreen,
   }
 })
