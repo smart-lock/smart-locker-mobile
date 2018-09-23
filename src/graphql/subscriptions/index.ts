@@ -10,3 +10,16 @@ subscription lockerState($lockerId: ID!) {
   }
 }
 `
+
+
+export const MY_LOCKERS_SUBSCRIPTION = gql`
+subscription myLockers {
+  myLockers{
+    id
+    busy
+    locked
+    closed
+    alarm
+  }
+}
+`
