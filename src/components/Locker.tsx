@@ -55,12 +55,12 @@ export const LockerSession: React.SFC<ILockerSessionGridItemProps> = ({
     </View>
 
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-      <EvilIcons name="bell" size={24} color={displayColor(locker.alarm)} />
-      <Text style={{color: displayColor(locker.alarm), marginLeft: 6}}>{displayAlarm(locker.alarm)}</Text>
+      <EvilIcons name="bell" size={24} color={displayColor(!locker.alarm)} />
+      <Text style={{color: displayColor(!locker.alarm), marginLeft: 6}}>{displayAlarm(locker.alarm)}</Text>
     </View>
 
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-      <EvilIcons name="clock" size={24} color={Colors.SUCCESS} />
+      <EvilIcons name="clock" size={24} color={'#4b6584'} />
       <Clock>
         {now => (
           <Text style={{color: '#4b6584', marginLeft: 6, fontSize: 10}}>
