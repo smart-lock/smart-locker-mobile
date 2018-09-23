@@ -112,7 +112,7 @@ export class LockerSessionDetail extends React.Component<ILockerSessionDetailPro
               inactiveLabel="Finalizar"
               activeIcon="check"
               inactiveIcon="check"
-              disabled={!locker.closed || !locker.locked || unclaimLoading}
+              disabled={locker.closed || locker.locked || unclaimLoading}
               loading={unclaimLoading}
               width={150}
               height={150}
