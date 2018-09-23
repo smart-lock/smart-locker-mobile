@@ -18,7 +18,7 @@ export class MyLockersContainer extends React.Component<MyLockersContainerProps>
     return (
       <Query
         query={MY_SESSIONS_QUERY}
-      >
+        pollInterval={500}>
         {({ loading, data }) => {
           if (loading) {
             return (
@@ -39,43 +39,4 @@ export class MyLockersContainer extends React.Component<MyLockersContainerProps>
       </Query>
     )
   }
-  // render() {
-  //   return (
-  //     <Subscription
-  //       subscription={MY_LOCKERS_SUBSCRIPTION}>
-  //       {({ data, loading }) => {
-  //         if (loading) {
-  //           return (
-  //             <Text>{loading ? 'LOADING' : 'DONE LOADING'}</Text>
-  //           )
-  //         }
-  //         console.log(data)
-  //         if (!data) {
-  //           return null
-  //         }
-  //         const { myLockers } = data
-          
-  //         return (
-  //           <View>
-  //             <Text>
-  //               ID: {myLockers.id.toString()}
-  //             </Text>
-  //             <Text>
-  //               CLOSED: {myLockers.closed.toString()}
-  //             </Text>
-  //             <Text>
-  //               LOCKED: {myLockers.locked.toString()}
-  //             </Text>
-  //             <Text>
-  //               BUSY: {myLockers.busy.toString()}
-  //             </Text>
-  //             <Text>
-  //               ALARM: {myLockers.alarm.toString()}
-  //             </Text>
-  //           </View>
-  //         )
-  //       }}
-  //     </Subscription>
-  //   )
-  // }
 }
