@@ -1,6 +1,7 @@
 import React from 'react'
 import GridView from 'react-native-super-grid';
-import { LockerSession, lockerSpacing, lockerWidth, ILockerSession } from './Locker';
+import { LockerSession, lockerSpacing, lockerWidth } from './Locker';
+import { ILockerSession } from '../model/session';
 
 export interface ILockerGrid {
   sessions: ILockerSession[]
