@@ -10,19 +10,25 @@ export interface IClockProps {
 }
 export class Clock extends React.Component<IClockProps, IClockState> {
   private interval: number = 0
+  private stillMounted = false;
 
   public state = {
     now: new Date(),
   }
   componentDidMount() {
+    this.stillMounted = true;
     this.interval = setInterval(() => {
-      this.setState({
-        now: new Date(),
-      })
+      if (this.stillMounted) {
+        this.setState({
+          now: new Date(),
+        })
+      }
+      
     }, this.props.precision || 1000)
   }
 
   componentWillUnmount() {
+    this.stillMounted = false;
     clearInterval(this.interval)
   }
 
