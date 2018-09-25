@@ -53,10 +53,10 @@ export class LockerSessionDetail extends React.Component<ILockerSessionDetailPro
 
     return (
       <ScreenWrapper>
-        {/* <ScrollView> */}
+        <ScrollView>
           {this.state.renderMap ? (
             <MapView
-              style={{height: 200, alignSelf: 'stretch'}}
+              style={{height: 150, alignSelf: 'stretch'}}
               initialRegion={{
                 latitude: -23.632783,
                 longitude: -46.713885,
@@ -72,7 +72,7 @@ export class LockerSessionDetail extends React.Component<ILockerSessionDetailPro
               />
             </MapView>
           ) : (
-            <View style={{height: 200, alignSelf: 'stretch', backgroundColor: '#d3d3d3'}} />
+            <View style={{height: 150, alignSelf: 'stretch', backgroundColor: '#d3d3d3'}} />
           )}
           <View style={{backgroundColor: Colors.WHITE}}>
             <BasicListItem>
@@ -124,7 +124,7 @@ export class LockerSessionDetail extends React.Component<ILockerSessionDetailPro
             </Text>  
           )}
           
-        {/* </ScrollView> */}
+        </ScrollView>
       </ScreenWrapper>
     )
   }
