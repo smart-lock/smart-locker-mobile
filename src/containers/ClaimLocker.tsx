@@ -14,6 +14,7 @@ export const LoadingOverlay = () => (
 
 export interface ClaimLockerContainerProps {
   navigateToSessionDetail: (lockerSessionId: string) => void
+  focused: boolean;
 }
 
 export class ClaimLockerContainer extends React.Component<ClaimLockerContainerProps> {
@@ -24,6 +25,7 @@ export class ClaimLockerContainer extends React.Component<ClaimLockerContainerPr
         renderLoading={LoadingOverlay}>
         {(claimLocker) => (
           <ClaimLockerCamera
+            renderCamera={this.props.focused}
             onLockerRead={(lockerId: string) => {
               claimLocker({
                 variables: {
