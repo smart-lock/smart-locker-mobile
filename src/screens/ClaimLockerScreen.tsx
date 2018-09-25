@@ -3,7 +3,7 @@ import { ScreenWrapper } from '../components/ScreenWrapper';
 import { basicStackScreenNavigationOptions } from '../resources/styles';
 import { ClaimLockerContainer } from '../containers/ClaimLocker';
 import { MyLockersScreens } from '../navigation/MyLockersNavigator';
-import { NavigationInjectedProps } from 'react-navigation';
+import { NavigationInjectedProps, NavigationEvents } from 'react-navigation';
 
 export class ClaimLockerScreen extends React.Component<NavigationInjectedProps> {
   static navigationOptions = basicStackScreenNavigationOptions({
@@ -16,10 +16,31 @@ export class ClaimLockerScreen extends React.Component<NavigationInjectedProps> 
     })
   }
 
+  public state = {
+    focused: false,
+  }
+
+  private handleFocus = () => {
+    this.setState({
+      focused: true,
+    })
+  }
+  private handleBlur= () => {
+    this.setState({
+      focused: false
+    })
+  }
   render() {
     return (
       <ScreenWrapper>
-        <ClaimLockerContainer navigateToSessionDetail={this.navigateToSessionDetail} />
+        <NavigationEvents
+          onDidFocus={this.handleFocus}
+          onDidBlur={this.handleBlur}
+        />
+        <ClaimLockerContainer
+          navigateToSessionDetail={this.navigateToSessionDetail}
+          focused={this.state.focused}
+        />
       </ScreenWrapper>
     )
   }
